@@ -6,7 +6,7 @@ export DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 docker run -v $DIR:/documents/ --name asciidoc-to-deckjs binout/docker-asciidoctor-deckjs asciidoctor -T /asciidoctor-backends/haml/deckjs -D /documents/output *.adoc
 
 echo "Copy resources"
-cd output ; sed 's/"\/\/cdnjs/"https:\/\/cdnjs/'  README.html > index.html ; rm README.html; cp -R ../images images
+cd output ; sed 's/"\/\/cdnjs/"https:\/\/cdnjs/'  slides.html > index.html ; rm slides.html; cp -R ../images images
 
 if [ ! -d "deck.js" ]; then
   echo "Retrieve deck.js"
