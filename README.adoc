@@ -17,6 +17,8 @@ Pre-requisites:: docker
 
 https://travis-ci.org/binout/karate-devoxxfr2018
 
+image:https://travis-ci.org/binout/karate-devoxxfr2018.svg?branch=master["Build Status", link="https://travis-ci.org/binout/karate-devoxxfr2018"]
+
 Slides are published with Github Pages : https://binout.github.io/karate-devoxxfr2018/
 
 NOTE:: Inspired from http://mgreau.com/posts/2016/03/28/asciidoc-to-gh-pages-with-travis-ci-docker-asciidoctor.html
