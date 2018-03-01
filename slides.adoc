@@ -13,6 +13,58 @@
 [quote]
 Web-Services Testing Made Simple.
 
-https://github.com/intuit/karate
+icon:github[] https://github.com/intuit/karate (+500 icon:star[])
 
-@KarateDSL
+icon:twitter[] @KarateDSL
+
+* Février 2017 : 1ère release (`0.1.2`)
+* Mars 2018 : `0.7.0`
+
+== Tests avec Karate
+
+* DSL (basé sur Cucumber) pour écrire des tests d'API HTTP
+
+icon:warning[] ce n'est pas du BDD !
+
+* Facile à écrire et à maintenir
+* Pas de _glue_  à coder
+* Rapide à exécuter
+
+== Hello World
+
+image::https://github.com/intuit/karate/raw/master/karate-demo/src/test/resources/karate-hello-world.jpg[]
+
+== Rest Assured
+
+[source, java]
+----
+@Test
+public void lotto_resource_returns_200_with_expected_id_and_winners() {
+
+  when().
+    get("/lotto/{id}", 5).
+  then().
+    statusCode(200).
+      body("lotto.lottoId", equalTo(5),
+      "lotto.winners.winnerId", containsOnly(23, 54));
+}
+----
+
+== Karate DSL
+
+[source]
+----
+Scenario: lotto resource returns 200 with expected id and winners
+
+Given path ‘lotto’, 5
+When method get
+Then status 200
+And match $.lotto.lottoId == 5
+And match $.lotto.winners[*].winnerId contains only [23, 54]
+----
+
+icon:info-circle[] http://tinyurl.com/karatera
+
+== Architecture
+
+image::https://image.slidesharecdn.com/karate-v14-171128044002/95/karate-mot-dallas-26oct2017-15-638.jpg?cb=1511844090[]
