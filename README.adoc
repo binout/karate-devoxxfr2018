@@ -24,3 +24,11 @@ Slides are published with Github Pages : https://binout.github.io/karate-devoxxf
 NOTE:: Inspired from http://mgreau.com/posts/2016/03/28/asciidoc-to-gh-pages-with-travis-ci-docker-asciidoctor.html
 
 TIP:: Use `export-slides-pdf.sh` script to export online slides to PDF
+
+== Run Karate test
+
+[source]
+----
+./mvnw verify
+----
+
