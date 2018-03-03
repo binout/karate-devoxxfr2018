@@ -68,3 +68,17 @@ icon:info-circle[] http://tinyurl.com/karatera
 == Architecture
 
 image::https://image.slidesharecdn.com/karate-v14-171128044002/95/karate-mot-dallas-26oct2017-15-638.jpg?cb=1511844090[]
+
+== Dans la _vraie_ vie
+
+* Breaking Change : 0.7.0 nécessite une version minimum de JRE
+* Intégration à une pipeline Jenkins
+* Gestion de différents environnements
+* Gestion de l'authentification
+
+== Notre utilisation
+
+* Tests d'intégration en _boite noire_
+* Nombre de Tests
+* Nombre de Features
+* Temps d'execution
