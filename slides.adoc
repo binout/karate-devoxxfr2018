@@ -29,6 +29,7 @@ icon:warning[] ce n'est pas du BDD !
 * Facile à écrire et à maintenir
 * Pas de _glue_  à coder
 * Rapide à exécuter
+* Parallélisme optionnel _gratuit_
 
 == Hello World
 
@@ -52,7 +53,7 @@ public void lotto_resource_returns_200_with_expected_id_and_winners() {
 
 == Karate DSL
 
-[source]
+[source, gherkin]
 ----
 Scenario: lotto resource returns 200 with expected id and winners
 
@@ -69,16 +70,44 @@ icon:info-circle[] http://tinyurl.com/karatera
 
 image::https://image.slidesharecdn.com/karate-v14-171128044002/95/karate-mot-dallas-26oct2017-15-638.jpg?cb=1511844090[]
 
+== Lexique
+
+* Définition
+** Feature
+** Scenario
+** Background
+
+== Notre utilisation
+
+* Pourquoi avoir choisi Karate
+* Tests d'intégration en _boite noire_
+* Nombre de Tests
+* Nombre de Features
+** Features de setup
+* Temps d'execution
+
+== Démos
+
+Enchainer un scénario complet :
+
+* POST (json)
+* Récupérer dans Location l'ID (notion de variable partagée aux scénarios)
+* GET
+* PUT (maj)
+
+* Faire un GET sur la liste d'entités
+* Utiliser le `contains` pour asserter l'existence
+
+== Démo avancée
+
+NOTE: Si il y a le temps
+
+* Utilisation de fonctions javascript
+* Authent (Basic Auth)
+
 == Dans la _vraie_ vie
 
 * Breaking Change : 0.7.0 nécessite une version minimum de JRE
 * Intégration à une pipeline Jenkins
 * Gestion de différents environnements
 * Gestion de l'authentification
-
-== Notre utilisation
-
-* Tests d'intégration en _boite noire_
-* Nombre de Tests
-* Nombre de Features
-* Temps d'execution
