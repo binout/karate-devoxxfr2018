@@ -26,9 +26,10 @@ icon:twitter[] @KarateDSL
 
 icon:warning[] ce n'est pas du BDD !
 
-* Facile à écrire et à maintenir
+* Simple : Facile à écrire et à maintenir
 * Pas de _glue_  à coder
 * Rapide à exécuter
+* JSON _first class citizen_
 * Parallélisme optionnel _gratuit_
 
 == Hello World
@@ -111,3 +112,4 @@ NOTE: Si il y a le temps
 * Intégration à une pipeline Jenkins
 * Gestion de différents environnements
 * Gestion de l'authentification
+* Implementation d'une temporisation custom
