@@ -1,6 +1,6 @@
 .DS_Store
-# Output directory for HTML files
 output/
+demo/karate.jar
 
 target/
 pom.xml.tag

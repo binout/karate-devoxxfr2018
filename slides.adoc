@@ -36,6 +36,14 @@ icon:warning[] ce n'est pas du BDD !
 
 image::https://github.com/intuit/karate/raw/master/karate-demo/src/test/resources/karate-hello-world.jpg[]
 
+== Demo
+
+
+[source]
+----
+java -jar karate.jar -m cfp-speaker.feature
+----
+
 == Rest Assured
 
 [source, java]
