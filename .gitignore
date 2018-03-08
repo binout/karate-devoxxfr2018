@@ -1,6 +1,6 @@
 .DS_Store
 output/
-demo/karate.jar
+demo/karate.log
 
 target/
 pom.xml.tag
