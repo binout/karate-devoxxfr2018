@@ -114,7 +114,8 @@ NOTE: Si il y a le temps
 * Utilisation de fonctions javascript
 * Authent (Basic Auth)
 * Runner standalone
-** mode mock `java -jar karate-netty-<version>-all.jar -m my-mock.feature -p 8080`
+** mode mock `java -jar karate-netty-all.jar -m my-mock.feature -p 8080`
+** mode UI `java -jar karate-netty-all.jar -u -t my-test.feature`
 
 == Dans la _vraie_ vie
 
