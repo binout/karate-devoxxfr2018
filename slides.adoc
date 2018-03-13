@@ -8,41 +8,38 @@
 :goto: true
 :status: true
 
-== Karate
+image::images/devoxx.png[float="right"]
 
-[quote]
-Web-Services Testing Made Simple.
+== Nico et Benoit
 
-icon:github[] https://github.com/intuit/karate (+500 icon:star[])
+TODO
 
-icon:twitter[] @KarateDSL
+== Problématique
 
-* Février 2017 : 1ère release (`0.1.2`)
-* Mars 2018 : `0.7.0`
+On doit faire des tests d'intégration sur une API REST.
+On est plutôt des développeurs Java.
+On a l'habitude de faire tests avec un client HTTP 
 
-== Tests avec Karate
+== JaxRs Client
 
-* DSL (basé sur Cucumber) pour écrire des tests d'API HTTP
-
-icon:warning[] ce n'est pas du BDD !
-
-* Simple : Facile à écrire et à maintenir
-* Pas de _glue_  à coder
-* Rapide à exécuter
-* JSON _first class citizen_
-* Parallélisme optionnel _gratuit_
-
-== Hello World
-
-image::https://github.com/intuit/karate/raw/master/karate-demo/src/test/resources/karate-hello-world.jpg[]
-
-== Demo
-
-
-[source]
+[source, java]
 ----
-java -jar karate.jar -m cfp-speaker.feature
+@Test
+public void should_finish_order_if_order_can_be_updated() throws IOException {
+    // Create new Order
+    final String orderId = IntegrationTestCase.newProductOrderId();
+
+    // Finish Order
+    final Response response = IntegrationTestCase.newClient().path("/product-orders/" + orderId + "/ending")
+            .request()
+            .post(Entity.json("{}"));
+    assertThat(response.getStatusInfo()).isEqualTo(Status.OK);
+}
 ----
+
+* besoin de commentaires, nommer les méthodes, nommer les tests, utiliser des factories
+* verbeux
+* maintenance et écriture pénible (et uniquement par les développeurs)
 
 == Rest Assured
 
@@ -60,24 +57,37 @@ public void lotto_resource_returns_200_with_expected_id_and_winners() {
 }
 ----
 
-== Karate DSL
+* plus élégante avec un DSL java
+* mais reste du code, et verbeux ...
+* voir pour faire un diff avec que la partie utile ?
 
-[source, gherkin]
+[canvas-image=images/karate-large.png]
+== Karate Large
+
+== Karate
+
+[quote]
+Web-Services Testing Made Simple.
+
+icon:github[] https://github.com/intuit/karate (+500 icon:star[])
+
+icon:twitter[] @KarateDSL
+
+* Février 2017 : 1ère release (`0.1.2`)
+* Mars 2018 : `0.7.0`
+
+== Hello Cats
+
+image::https://github.com/intuit/karate/raw/master/karate-demo/src/test/resources/karate-hello-world.jpg[]
+
+== Demo
+
+Live coding
+
+[source]
 ----
-Scenario: lotto resource returns 200 with expected id and winners
-
-Given path ‘lotto’, 5
-When method get
-Then status 200
-And match $.lotto.lottoId == 5
-And match $.lotto.winners[*].winnerId contains only [23, 54]
+java -jar karate.jar -m cfp-speaker.feature
 ----
-
-icon:info-circle[] http://tinyurl.com/karatera
-
-== Architecture
-
-image::https://image.slidesharecdn.com/karate-v14-171128044002/95/karate-mot-dallas-26oct2017-15-638.jpg?cb=1511844090[]
 
 == Lexique
 
@@ -86,18 +96,32 @@ image::https://image.slidesharecdn.com/karate-v14-171128044002/95/karate-mot-dal
 ** Scenario
 ** Background
 
-== Notre utilisation
+== Tests avec Karate
 
-* Pourquoi avoir choisi Karate
-* Tests d'intégration en _boite noire_
-* Nombre de Tests
-* Nombre de Features
-** Features de setup
-* Temps d'execution
+* DSL (basé sur Cucumber) pour écrire des tests d'API HTTP
 
-== Démos
+icon:warning[] ce n'est pas du BDD !
 
-Enchainer un scénario complet :
+* Simple : Facile à écrire et à maintenir
+* Pas de _glue_  à coder
+* Rapide à exécuter
+* JSON _first class citizen_
+* Parallélisme optionnel _gratuit_
+
+== Intégration 
+
+* Intégration Eclipse/Intellij
+** support Cucumber plugin
+* Intégration Maven/Gradle
+* Intégration JUnit4/TestNG
+** Runner
+* Structure de répertoires pour organiser les features
+** karate-config.js
+** mutualisation feature 
+
+== Démo dans l'IDE
+
+Enchainer un scénario complet (film/acteur/karate)
 
 * POST (json)
 * Récupérer dans Location l'ID (notion de variable partagée aux scénarios)
@@ -106,21 +130,20 @@ Enchainer un scénario complet :
 
 * Faire un GET sur la liste d'entités
 * Utiliser le `contains` pour asserter l'existence
+* Montrer les matchers, #UUID, #notnull, ..
 
-== Démo avancée
+* BONUS : mode UI
 
-NOTE: Si il y a le temps
+== Des chiffres
 
-* Utilisation de fonctions javascript
+* Nombre de Tests
+* Nombre de Features
+** Features de setup
+* Temps d'execution
+
+== Pour aller plus loin
+
+* Utilisation de fonctions javascript/java
 * Authent (Basic Auth)
-* Runner standalone
+* Test mock : consumer driving contract
 ** mode mock `java -jar karate-netty-all.jar -m my-mock.feature -p 8080`
-** mode UI `java -jar karate-netty-all.jar -u -t my-test.feature`
-
-== Dans la _vraie_ vie
-
-* Breaking Change : 0.7.0 nécessite une version minimum de JRE
-* Intégration à une pipeline Jenkins
-* Gestion de différents environnements
-* Gestion de l'authentification
-* Implementation d'une temporisation custom
