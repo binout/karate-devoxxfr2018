@@ -15,5 +15,5 @@ Feature: creates a movie
     Given path 'movies', response.id
     When method get
     Then status 200
-    And match response contains { id: '#(response.id)', title: 'Karate Kid' }
+    And match response contains { title: 'Karate Kid' }
     And assert response.actors.length == 0
