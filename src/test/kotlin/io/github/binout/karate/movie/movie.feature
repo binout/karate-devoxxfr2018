@@ -9,8 +9,8 @@ Feature: creates a movie
     And request { title: 'Karate Kid' }
     When method post
     Then status 201
-    And match header Location contains 'http://localhost:8080/movies'
     And match response contains { id: '#notnull' }
+    And match header Location contains 'http://localhost:8080/movies', '#(response.id)'
 
     Given path 'movies', response.id
     When method get
