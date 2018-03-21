@@ -16,7 +16,7 @@ fun main(args: Array<String>) {
     runApplication<KarateApplication>(*args)
 }
 
-var movies:MutableMap<String, Movie> = mutableMapOf()
+var movies: MutableMap<String, Movie> = mutableMapOf()
 
 @RestController
 class Server {
@@ -24,9 +24,9 @@ class Server {
     fun ping() = "pong"
 
     @PostMapping
-    fun greet(@RequestBody person:Person) = "Hello there, ${person.firstName} ${person.lastName}"
+    fun greet(@RequestBody person: Person) = "Hello there, ${person.firstName} ${person.lastName}"
 
-    data class Person(val firstName:String, val lastName: String)
+    data class Person(val firstName: String, val lastName: String)
 }
 
 @RestController
@@ -34,7 +34,7 @@ class Server {
 class MovieEndpoint {
 
     @PostMapping
-    fun createMovie(@RequestBody movie:Movie): ResponseEntity<Movie> {
+    fun createMovie(@RequestBody movie: Movie): ResponseEntity<Movie> {
         val id = UUID.randomUUID().toString()
         val persistedMovie = movie.copy(id = id)
         movies.put(id, persistedMovie)
@@ -45,20 +45,29 @@ class MovieEndpoint {
         ).body(persistedMovie)
     }
 
+    @GetMapping
+    fun allMovies() = movies.values
+
     @GetMapping("/{id}")
-    fun getMovie(@PathVariable("id") id:String): ResponseEntity<Movie>
-            = movies[id]?.let { ResponseEntity.ok(it) } ?: ResponseEntity.notFound().build()
+    fun getMovie(@PathVariable("id") id: String): ResponseEntity<Movie> =
+            movies[id]?.let { ResponseEntity.ok(it) }
+            ?: ResponseEntity.notFound().build()
 
     @PostMapping("/{id}/actors")
-    fun addActor(@PathVariable("id") id:String, @RequestBody actor:Actor): ResponseEntity<Unit> {
-        movies[id]?.let {
-            movies.put(it.id, it.copy(actors = it.actors + actor))
-            return ResponseEntity.ok().build()
-        }
-        return ResponseEntity.notFound().build()
-    }
+    fun addActor(@PathVariable("id") id: String, @RequestBody actor: Actor): ResponseEntity<Unit> =
+            movies[id]?.let {
+                movies.put(it.id, it.copy(actors = it.actors + actor))
+                return ResponseEntity.ok().build()
+            } ?: ResponseEntity.notFound().build()
 
-    data class Movie(val id:String = "", val title: String, val actors: Array<Actor> = emptyArray())
-    data class Actor(val id:String = "", val firstName:String, val lastName: String)
+    data class Movie(val id: String = "", val title: String, val actors: Array<Actor> = emptyArray())
+    data class Actor(val firstName: String, val lastName: String)
+}
+
+@RestController
+@RequestMapping("/actors")
+class ActorEndpoint {
+    @GetMapping
+    fun allActors() = movies.values.flatMap { it.actors.asIterable() }.distinct()
 }
 

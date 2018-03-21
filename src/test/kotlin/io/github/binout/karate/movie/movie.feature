@@ -10,13 +10,12 @@ Feature: creates a movie
     When method post
     Then status 201
     And match response contains { id: '#notnull' }
-    And match header Location contains 'http://localhost:8080/movies', '#(response.id)'
+    And match header Location == 'http://localhost:8080/movies/' + response.id
 
     Given path 'movies', response.id
     When method get
     Then status 200
     And match response contains { title: 'Karate Kid' }
-    And assert response.actors.length == 0
 
     Given path 'movies', '42'
     When method get
@@ -25,7 +24,7 @@ Feature: creates a movie
   Scenario: add an actor to a movie
 
     Given path 'movies'
-    And request { title: 'Fury Of The Dragon' }
+    And request { title: 'Karate Tiger' }
     When method post
     Then status 201
 
@@ -34,7 +33,7 @@ Feature: creates a movie
     Given path 'movies', movieId
     When method get
     Then status 200
-    And match response contains { title: 'Fury Of The Dragon' }
+    And match response contains { title: 'Karate Tiger' }
 
     Given path 'movies', movieId, 'actors'
     And request { firstName: 'JC', lastName: 'VD' }
@@ -44,5 +43,4 @@ Feature: creates a movie
     Given path 'movies', movieId
     When method get
     Then status 200
-    And match response contains { title: 'Fury Of The Dragon' }
-    And assert response.actors.length == 1
+    And match response.actors contains { firstName: 'JC', lastName: 'VD' }
