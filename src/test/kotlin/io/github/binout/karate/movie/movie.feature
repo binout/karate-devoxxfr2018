@@ -29,12 +29,20 @@ Feature: creates a movie
     When method post
     Then status 201
 
-    Given path 'movies', response.id
+    * def movieId = response.id
+
+    Given path 'movies', movieId
     When method get
     Then status 200
     And match response contains { title: 'Fury Of The Dragon' }
 
-    Given path 'movies', response.id, 'actors'
+    Given path 'movies', movieId, 'actors'
     And request { firstName: 'JC', lastName: 'VD' }
     When method post
     Then status 200
+
+    Given path 'movies', movieId
+    When method get
+    Then status 200
+    And match response contains { title: 'Fury Of The Dragon' }
+    And assert response.actors.length == 1

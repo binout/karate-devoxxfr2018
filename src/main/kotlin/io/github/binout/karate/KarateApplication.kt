@@ -52,8 +52,7 @@ class MovieEndpoint {
     @PostMapping("/{id}/actors")
     fun addActor(@PathVariable("id") id:String, @RequestBody actor:Actor): ResponseEntity<Unit> {
         movies[id]?.let {
-            it.copy(actors = it.actors + actor)
-            movies.put(it.id, it)
+            movies.put(it.id, it.copy(actors = it.actors + actor))
             return ResponseEntity.ok().build()
         }
         return ResponseEntity.notFound().build()
