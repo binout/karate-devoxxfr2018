@@ -1,5 +1,6 @@
 package io.github.binout.karate
 
+import io.github.binout.karate.MovieEndpoint.Movie
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.http.ResponseEntity
@@ -15,7 +16,7 @@ fun main(args: Array<String>) {
     runApplication<KarateApplication>(*args)
 }
 
-var movies:MutableMap<String, MovieEndpoint.Movie> = mutableMapOf()
+var movies:MutableMap<String, Movie> = mutableMapOf()
 
 @RestController
 class Server {
@@ -45,7 +46,18 @@ class MovieEndpoint {
     }
 
     @GetMapping("/{id}")
-    fun getMovie(@PathVariable("id") id:String) = movies[id]
+    fun getMovie(@PathVariable("id") id:String): ResponseEntity<Movie>
+            = movies[id]?.let { ResponseEntity.ok(it) } ?: ResponseEntity.notFound().build()
+
+    @PostMapping("/{id}/actors")
+    fun addActor(@PathVariable("id") id:String, @RequestBody actor:Actor): ResponseEntity<Unit> {
+        movies[id]?.let {
+            it.copy(actors = it.actors + actor)
+            movies.put(it.id, it)
+            return ResponseEntity.ok().build()
+        }
+        return ResponseEntity.notFound().build()
+    }
 
     data class Movie(val id:String = "", val title: String, val actors: Array<Actor> = emptyArray())
     data class Actor(val id:String = "", val firstName:String, val lastName: String)
