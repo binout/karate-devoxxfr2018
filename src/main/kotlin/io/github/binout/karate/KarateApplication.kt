@@ -19,17 +19,6 @@ fun main(args: Array<String>) {
 var movies: MutableMap<String, Movie> = mutableMapOf()
 
 @RestController
-class Server {
-    @GetMapping
-    fun ping() = "pong"
-
-    @PostMapping
-    fun greet(@RequestBody person: Person) = "Hello there, ${person.firstName} ${person.lastName}"
-
-    data class Person(val firstName: String, val lastName: String)
-}
-
-@RestController
 @RequestMapping("/movies")
 class MovieEndpoint {
 
