@@ -16,11 +16,13 @@ TODO
 
 == Problématique
 
-On doit faire des tests d'intégration sur une API REST.
-On est plutôt des développeurs Java.
-On a l'habitude de faire tests avec un client HTTP 
+image::images/karate-pbk.png[]
 
-== JaxRs Client
+//On doit faire des tests d'intégration sur une API REST.
+//On est plutôt des développeurs Java.
+//On a l'habitude de faire tests avec un client HTTP
+
+== Solution 1 : JaxRs Client
 
 [source, java]
 ----
@@ -37,11 +39,21 @@ public void should_finish_order_if_order_can_be_updated() throws IOException {
 }
 ----
 
-* besoin de commentaires, nommer les méthodes, nommer les tests, utiliser des factories
-* verbeux
-* maintenance et écriture pénible (et uniquement par les développeurs)
+// besoin de commentaires, nommer les méthodes, nommer les tests, utiliser des factories
+// verbeux
+// maintenance et écriture pénible (et uniquement par les développeurs)
 
-== Rest Assured
+[canvas-image=images/boring.png]
+== Boring
+
+[.canvas-caption, position=bottom-left]
+Maintenance et écriture pénible
+[.canvas-caption, position=center-left]
+Verbeux
+[.canvas-caption, position=top-left]
+Besoin de commentaires
+
+== Solution 2 : Rest Assured
 
 [source, java]
 ----
@@ -57,12 +69,19 @@ public void lotto_resource_returns_200_with_expected_id_and_winners() {
 }
 ----
 
-* plus élégante avec un DSL java
-* mais reste du code, et verbeux ...
-* voir pour faire un diff avec que la partie utile ?
+[canvas-image=images/code.png]
+== Boring
+
+[.canvas-caption, position=center-left]
+Plus élégant avec un DSL en java
+[.canvas-caption, position=bottom-left]
+mais reste du code, et encore un peu verbeux
 
 [canvas-image=images/karate-large.png]
 == Karate Large
+
+[.canvas-caption, position=bottom-left]
+LA Solution !
 
 == Karate
 
@@ -80,10 +99,11 @@ icon:twitter[] @KarateDSL
 
 image::https://github.com/intuit/karate/raw/master/karate-demo/src/test/resources/karate-hello-world.jpg[]
 
-== Demo
+== Standalone Runner
 
-Live coding
+image::images/start-demo.png[]
 
+.Getting Started
 [source]
 ----
 java -jar karate.jar -m cfp-speaker.feature
@@ -100,15 +120,16 @@ java -jar karate.jar -m cfp-speaker.feature
 
 * DSL (basé sur Cucumber) pour écrire des tests d'API HTTP
 
-icon:warning[] ce n'est pas du BDD !
+* MAIS *ce n'est pas du BDD !*
+
+image::images/cucumber.png[float="right"]
 
 * Simple : Facile à écrire et à maintenir
 * Pas de _glue_  à coder
 * Rapide à exécuter
 * JSON _first class citizen_
-* Parallélisme optionnel _gratuit_
 
-== Intégration 
+== Intégration
 
 * Intégration Eclipse/Intellij
 ** support Cucumber plugin
@@ -117,7 +138,7 @@ icon:warning[] ce n'est pas du BDD !
 ** Runner
 * Structure de répertoires pour organiser les features
 ** karate-config.js
-** mutualisation feature 
+** mutualisation feature
 
 == Démo dans l'IDE
 
