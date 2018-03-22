@@ -12,7 +12,14 @@ image::images/devoxx.png[float="right"]
 
 == Nico et Benoit
 
-TODO
+icon:twitter[] @NicolasComet +
+icon:github[] https://github.com/ncomet +
+icon:twitter[] @binout +
+icon:github[] https://github.com/binout
+
+image::images/lectra.png[]
+
+image::images/lectra-versalis.jpg[versalis, 800]
 
 == Problématique
 
@@ -81,7 +88,7 @@ mais reste du code, et encore un peu verbeux
 == Karate Large
 
 [.canvas-caption, position=bottom-left]
-LA Solution !
+Une solution !
 
 == Karate
 
@@ -163,6 +170,6 @@ Enchainer un scénario complet (film/acteur/karate)
 == Pour aller plus loin
 
 * Utilisation de fonctions javascript/java
-* Authent (Basic Auth)
+* Authentication
 * Test mock : consumer driving contract
 ** mode mock `java -jar karate-netty-all.jar -m my-mock.feature -p 8080`
