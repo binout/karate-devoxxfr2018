@@ -111,3 +111,32 @@ Feature: create data for tests needs
     When method post
     Then status 200
 
+    # Kill Bill
+
+    Given path 'movies'
+    And request { title: 'Kill Bill' }
+    When method post
+    Then status 201
+
+    * def movieId = response.id
+
+    Given path 'movies', movieId, 'actors'
+    And request { firstName: 'Uma', lastName: 'Thurman' }
+    When method post
+    Then status 200
+
+    Given path 'movies', movieId, 'actors'
+    And request { firstName: 'Lucy', lastName: 'Liu' }
+    When method post
+    Then status 200
+
+    Given path 'movies', movieId, 'actors'
+    And request { firstName: 'Michael', lastName: 'Madsen' }
+    When method post
+    Then status 200
+
+    Given path 'movies', movieId, 'actors'
+    And request { firstName: 'Daryl', lastName: 'Hannah' }
+    When method post
+    Then status 200
+
