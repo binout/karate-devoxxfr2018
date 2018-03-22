@@ -1,7 +1,7 @@
 Feature: create data for tests needs
 
   Background:
-    * url 'http://localhost:8080'
+    * url baseUrl
 
   Scenario: add actors to several movies
 

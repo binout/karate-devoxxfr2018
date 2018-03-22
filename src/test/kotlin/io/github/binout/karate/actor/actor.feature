@@ -1,7 +1,7 @@
 Feature: retrieve all actors
 
   Background:
-    * url 'http://localhost:8080'
+    * url baseUrl
     * def data = call read('classpath:karateflix.feature')
 
   Scenario: get on actors

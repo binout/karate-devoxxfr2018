@@ -1,7 +1,7 @@
 Feature: creates a movie
 
   Background:
-    * url 'http://localhost:8080'
+    * url baseUrl
 
   Scenario: create a movie and retrieve it
 
