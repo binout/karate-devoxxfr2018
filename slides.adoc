@@ -129,19 +129,10 @@ image::images/cucumber.png[float="right"]
 * Rapide à exécuter
 * JSON _first class citizen_
 
-== Intégration
-
-* Intégration Eclipse/Intellij
-** support Cucumber plugin
-* Intégration Maven/Gradle
-* Intégration JUnit4/TestNG
-** Runner
-* Structure de répertoires pour organiser les features
-** karate-config.js
-** mutualisation feature
-
 == Démo dans l'IDE
 
+
+////
 Enchainer un scénario complet (film/acteur/karate)
 
 * POST (json)
@@ -154,13 +145,19 @@ Enchainer un scénario complet (film/acteur/karate)
 * Montrer les matchers, #UUID, #notnull, ..
 
 * BONUS : mode UI
+////
 
+
+
+////
 == Des chiffres
 
 * Nombre de Tests
 * Nombre de Features
 ** Features de setup
 * Temps d'execution
+////
+
 
 == Pour aller plus loin
 
