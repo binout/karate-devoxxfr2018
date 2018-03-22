@@ -131,6 +131,7 @@ image::images/cucumber.png[float="right"]
 
 == Démo dans l'IDE
 
+image::images/demo.gif[]
 
 ////
 Enchainer un scénario complet (film/acteur/karate)
