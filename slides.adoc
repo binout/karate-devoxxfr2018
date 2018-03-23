@@ -88,7 +88,7 @@ mais reste du code, et encore un peu verbeux
 == Karate Large
 
 [.canvas-caption, position=bottom-left]
-Une solution !
+Une autre solution !
 
 == Karate
 
@@ -132,9 +132,11 @@ java -jar karate.jar -m cfp-speaker.feature
 image::images/cucumber.png[float="right"]
 
 * Simple : Facile à écrire et à maintenir
+* Plain text
 * Pas de _glue_  à coder
 * Rapide à exécuter
 * JSON _first class citizen_
+* Pas besoin d'être développeur
 
 == Démo dans l'IDE
 
