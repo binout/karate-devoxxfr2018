@@ -125,8 +125,7 @@ java -jar karate.jar -m cfp-speaker.feature
 
 == Tests avec Karate
 
-* DSL (basé sur Cucumber) pour écrire des tests d'API HTTP
-
+* DSL (basé sur Cucumber) pour écrire des tests d'APIs HTTP
 * MAIS *ce n'est pas du BDD !*
 
 image::images/cucumber.png[float="right"]
