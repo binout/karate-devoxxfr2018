@@ -1,4 +1,4 @@
-Feature: creates a movie
+Feature: working with movies
 
   Background:
     * url baseUrl
