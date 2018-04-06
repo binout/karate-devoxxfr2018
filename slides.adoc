@@ -116,10 +116,9 @@ java -jar karate.jar -t cfp-speaker.feature
 
 == Tests avec Karate
 
-* DSL (basé sur Cucumber) pour écrire des tests d'APIs HTTP
-* MAIS *ce n'est pas du BDD !*
+DSL Gherkin pour écrire des tests d'APIs HTTP MAIS *ce n'est pas du BDD !*
 
-image::images/cucumber.png[float="right"]
+image::images/cucumber.png[float="center"]
 
 * Plain text (pas besoin de compilation)
 * Facile à écrire et à maintenir
@@ -133,12 +132,13 @@ image::images/demo.gif[]
 
 == Pour aller plus loin
 
+image::images/karate-ui.png[float="right"]
+
 * Karate UI
 * Permet de configurer plusieurs environnements
-* Mock Servlet : sans besoin de démarrer un container 
+* Mock Servlet : pas besoin de démarrer un container 
 * Supporte aussi SOAP (XML)
 * Consumer Driving Contract
-** mode mock `java -jar karate-netty-all.jar -m my-mock.feature -p 8080`
 
 == Questions ?
 
