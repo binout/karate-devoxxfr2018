@@ -175,6 +175,6 @@ Enchainer un scénario complet (film/acteur/karate)
 * Test mock : consumer driving contract
 ** mode mock `java -jar karate-netty-all.jar -m my-mock.feature -p 8080`
 
-== Questions
+== Questions ?
 
 image::images/salute.gif[]
