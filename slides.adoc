@@ -177,4 +177,4 @@ Enchainer un scénario complet (film/acteur/karate)
 
 == Questions ?
 
-image::images/salute.gif[]
+image::images/salute.gif[salute, 640]
