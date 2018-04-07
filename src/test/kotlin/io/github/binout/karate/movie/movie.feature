@@ -10,7 +10,7 @@ Feature: working with movies
     When method post
     Then status 201
     And match response contains { id: '#notnull' }
-    And match header Location == 'http://localhost:8080/movies/' + response.id
+    And match header Location == baseUrl + '/movies/' + response.id
 
     Given path 'movies', response.id
     When method get
