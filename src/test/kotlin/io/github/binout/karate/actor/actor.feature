@@ -2,7 +2,7 @@ Feature: retrieve all actors
 
   Background:
     * url baseUrl
-    * def data = call read('classpath:karateflix.feature')
+    * call read('classpath:karateflix.feature')
 
   Scenario: get on actors
 
