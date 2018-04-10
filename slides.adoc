@@ -131,7 +131,7 @@ image::images/demo.gif[]
 
 == Documentation
 
-
+image::images/documentation.png[]
 
 == Pour aller plus loin
 
