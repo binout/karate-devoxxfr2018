@@ -129,6 +129,10 @@ image::images/cucumber.png[float="center"]
 
 image::images/demo.gif[]
 
+== Documentation
+
+
+
 == Pour aller plus loin
 
 image::images/karate-ui.png[float="right"]
@@ -141,3 +145,7 @@ image::images/karate-ui.png[float="right"]
 == Questions ?
 
 image::images/salute.gif[salute, 640]
+
+Le code et les slides : icon:github[]/binout/karate-devoxxfr2018
+
+image::images/qrcode.jpg[]
