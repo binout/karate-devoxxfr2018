@@ -31,7 +31,7 @@ image::images/karate-pbk.png[]
 ----
 @Test
 public void should_process_order_and_then_cancel() throws Exception {
-    // Create new Order 
+    // Create new Order
     final String orderId = IntegrationTestCase.newProductOrderId();
 
     // Process Order
@@ -39,7 +39,7 @@ public void should_process_order_and_then_cancel() throws Exception {
             .request()
             .put(Entity.json("{\"reference\" : \"ABTYD\"}"));
     assertThat(response.getStatusInfo()).isEqualTo(Status.OK);
-    
+
     // Cancel Order
     final Response response = IntegrationTestCase.newClient().path("/product-orders/" + orderId)
             .request()
@@ -135,12 +135,16 @@ image::images/documentation.png[]
 
 == Pour aller plus loin
 
-image::images/karate-ui.png[float="right"]
+image::images/kick-pain.gif[float="right"]
 
-* Karate UI
-* Mock Servlet : pas besoin de démarrer un container 
-* Supporte aussi SOAP (XML)
-* Consumer Driven Contract
+* Mock Servlet : pas besoin de démarrer un _vrai_ serveur
+* Intégration à Spring REST Docs
+* Utilisation dans scenario Gatling
+* Import scenario Postman
+* Supporte aussi SOAP (XML) 🤮
+* Consumer Driven Contracts
+** Test Doubles
+** Contract Tests
 
 == Questions ?
 
