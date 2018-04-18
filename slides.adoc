@@ -120,10 +120,10 @@ DSL `Gherkin` pour écrire des tests d'APIs HTTP MAIS *ce n'est pas du BDD !*
 
 image::images/cucumber.png[float="center"]
 
-* Facile à écrire et à maintenir
-* Pas de _glue_  à coder
-* Rapide à exécuter (en parallèle)
-* JSON _first class citizen_
+* ✍️ Facile à écrire et à maintenir
+* 👌 Pas de _glue_  à coder
+* ⏱️ Rapide à exécuter (en parallèle)
+* 📄 JSON _first class citizen_
 
 == Démo dans l'IDE
 
