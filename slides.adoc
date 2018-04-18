@@ -1,4 +1,4 @@
-= Ceinture noire `Karate` en tests d’API REST
+= Ceinture noire `Karate` 🥋 en tests d’API REST
 :icons: font
 :asset-uri-scheme: https
 :source-highlighter: highlightjs
@@ -137,10 +137,10 @@ image::images/documentation.png[]
 
 image::images/kick-pain.gif[float="right"]
 
-* 👺 Mock Servlet : pas besoin de démarrer un _vrai_ serveur
+* 🤥 Mock Servlet : pas besoin de démarrer un _vrai_ serveur
 * 📑 Intégration à Spring REST Docs
-* 🤫 Utilisation dans scenario Gatling
-* 🖱️ Import scenario Postman
+* 🔜 Utilisation dans scenario Gatling
+* 🖥️ Import scenario Postman
 * 🤮 Supporte aussi SOAP (XML) 
 * 🤔 Consumer Driven Contracts
 ** Test Doubles
