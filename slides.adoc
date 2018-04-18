@@ -137,12 +137,12 @@ image::images/documentation.png[]
 
 image::images/kick-pain.gif[float="right"]
 
-* Mock Servlet : pas besoin de démarrer un _vrai_ serveur
-* Intégration à Spring REST Docs
-* Utilisation dans scenario Gatling
-* Import scenario Postman
-* Supporte aussi SOAP (XML) 🤮
-* Consumer Driven Contracts
+* 👺 Mock Servlet : pas besoin de démarrer un _vrai_ serveur
+* 📑 Intégration à Spring REST Docs
+* 🤫 Utilisation dans scenario Gatling
+* 🖱️ Import scenario Postman
+* 🤮 Supporte aussi SOAP (XML) 
+* 🤔 Consumer Driven Contracts
 ** Test Doubles
 ** Contract Tests
 
