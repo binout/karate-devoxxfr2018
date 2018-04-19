@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=" http-equiv="Content-Type">
+<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+<meta content="Asciidoctor 1.5.5" name="generator">
+<title>Ceinture noire Karate 🥋 en tests d’API REST</title>
+<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+<style>
+.conum { display: inline-block; color: white !important; background-color: #222222; -webkit-border-radius: 100px; border-radius: 100px; text-align: center; width: 1.2em; height: 1.2em; font-size: 0.9em; font-weight: bold; line-height: 1.2; font-family: Arial, sans-serif; font-style: normal; position: relative; top: -0.1em; }
+.conum * { color: white !important; }
+.conum + b { display: none; }
+.conum:after { content: attr(data-value); }
+.conum:not([data-value]):empty { display: none; }
+.colist table td:first-of-type { padding-right: 0.25em; }
+</style>
+<link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css" rel="stylesheet">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+<link href="deck.js/core/deck.core.css" rel="stylesheet">
+<link href="deck.js/extensions/scale/deck.scale.css" media="screen" rel="stylesheet">
+<link href="deck.js/extensions/goto/deck.goto.css" media="screen" rel="stylesheet">
+<link href="deck.js/extensions/navigation/deck.navigation.css" media="screen" rel="stylesheet">
+<link href="deck.js/extensions/status/deck.status.css" media="screen" rel="stylesheet">
+<link href="deck.js/themes/style/swiss.css" media="screen" rel="stylesheet">
+<link href="deck.js/themes/transition/fade.css" media="screen" rel="stylesheet">
+<link href="deck.js/core/print.css" media="print" rel="stylesheet">
+<script src="deck.js/modernizr.custom.js"></script>
+</head>
+<body class="article">
+<div class="deck-container">
+<section class="slide" id="title-slide">
+<h1>Ceinture noire <code>Karate</code> 🥋 en tests d’API REST</h1>
+</section>
+<div id="preamble">
+<div class="sectionbody">
+<div class="imageblock" style="float: right">
+<div class="content">
+<img alt="devoxx" src="images/devoxx.png">
+</div>
+</div>
+</div>
+</div>
+<section class="slide" id="_nico_et_benoit">
+<h2>Nico et Benoit</h2>
+<div class="paragraph"><p><span class="icon"><i class="icon-twitter"></i></span> @NicolasComet<br>
+<span class="icon"><i class="icon-github"></i></span> <a class="bare" href="https://github.com/ncomet">https://github.com/ncomet</a><br>
+<span class="icon"><i class="icon-twitter"></i></span> @binout<br>
+<span class="icon"><i class="icon-github"></i></span> <a class="bare" href="https://github.com/binout">https://github.com/binout</a></p></div>
+<div class="imageblock">
+<div class="content">
+<img alt="lectra" src="images/lectra.png">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img alt="versalis" src="images/lectra-versalis.jpg" width="800">
+</div>
+</div>
+</section>
+<section class="slide" id="_problématique">
+<h2>Problématique</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="karate pbk" src="images/karate-pbk.png">
+</div>
+</div>
+</section>
+<section class="slide" id="_solution_1_jaxrs_client">
+<h2>Solution 1 : JaxRs Client</h2>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="java language-java">@Test
+public void should_process_order_and_then_cancel() throws Exception {
+    // Create new Order
+    final String orderId = IntegrationTestCase.newProductOrderId();
+
+    // Process Order
+    final Response response = IntegrationTestCase.newClient().path("/product-orders/" + orderId)
+            .request()
+            .put(Entity.json("{\"reference\" : \"ABTYD\"}"));
+    assertThat(response.getStatusInfo()).isEqualTo(Status.OK);
+
+    // Cancel Order
+    final Response response = IntegrationTestCase.newClient().path("/product-orders/" + orderId)
+            .request()
+            .delete();
+    assertThat(response.getStatusInfo()).isEqualTo(Status.NO_CONTENT);
+}</code></pre>
+</div>
+</div>
+</section>
+<section class="slide canvas-image" id="_boring" style="background-image: url(images/boring.png)">
+<div class="paragraph canvas-caption"><p class="bottom-left">Maintenance et écriture pénible</p></div>
+<div class="paragraph canvas-caption"><p class="center-left">Verbeux</p></div>
+<div class="paragraph canvas-caption"><p class="top-left">Besoin de commentaires</p></div>
+</section>
+<section class="slide" id="_solution_2_rest_assured">
+<h2>Solution 2 : Rest Assured</h2>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="java language-java">@Test
+public void lotto_resource_returns_200_with_expected_id_and_winners() {
+
+  when().
+    get("/lotto/{id}", 5).
+  then().
+    statusCode(200).
+      body("lotto.lottoId", equalTo(5),
+      "lotto.winners.winnerId", containsOnly(23, 54));
+}</code></pre>
+</div>
+</div>
+</section>
+<section class="slide canvas-image" id="_boring_2" style="background-image: url(images/code.png)">
+<div class="paragraph canvas-caption"><p class="center-left">Plus élégant avec un DSL en java</p></div>
+<div class="paragraph canvas-caption"><p class="bottom-left">mais reste du code, et encore un peu verbeux</p></div>
+</section>
+<section class="slide canvas-image" id="_karate_large" style="background-image: url(images/karate-large.png)">
+<div class="paragraph canvas-caption"><p class="bottom-left">Une autre solution !</p></div>
+</section>
+<section class="slide" id="_karate">
+<h2>Karate</h2>
+<div class="imageblock" style="float: right">
+<div class="content">
+<img alt="karate logo" src="images/karate-logo.svg">
+</div>
+</div>
+<div class="quoteblock">
+<blockquote>
+Web-Services Testing Made Simple.
+<div class="attribution">
+<cite>Peter Thomas (Intuit)</cite>
+</div>
+</blockquote>
+</div>
+<div class="paragraph"><p><span class="icon"><i class="icon-github"></i></span> <a class="bare" href="https://github.com/intuit/karate">https://github.com/intuit/karate</a> (+500 <span class="icon"><i class="icon-star"></i></span>)</p></div>
+<div class="paragraph"><p><span class="icon"><i class="icon-twitter"></i></span> @KarateDSL</p></div>
+<div class="ulist">
+<ul>
+<li>Février 2017 : 1ère release (<code>0.1.2</code>)</li>
+<li>Mars 2018 : <code>0.7.0</code></li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_hello_cats">
+<h2>Hello Cats</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="karate hello world" src="https://github.com/intuit/karate/raw/master/karate-demo/src/test/resources/karate-hello-world.jpg">
+</div>
+</div>
+</section>
+<section class="slide" id="_standalone_runner">
+<h2>Standalone Runner</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="start demo" src="images/start-demo.png">
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Testing <code><a class="bare" href="https://cfp.devoxx.fr/">https://cfp.devoxx.fr/</a></code></div>
+<div class="content">
+<pre class="highlight"><code>java -jar karate.jar -t cfp-speaker.feature</code></pre>
+</div>
+</div>
+</section>
+<section class="slide" id="_tests_avec_karate">
+<h2>Tests avec Karate</h2>
+<div class="paragraph"><p>DSL <code>Gherkin</code> pour écrire des tests d&#8217;APIs HTTP MAIS <strong>ce n&#8217;est pas du BDD !</strong></p></div>
+<div class="imageblock" style="float: center">
+<div class="content">
+<img alt="cucumber" src="images/cucumber.png">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>✍️ Facile à écrire et à maintenir</li>
+<li>👌 Pas de <em>glue</em>  à coder</li>
+<li>⏱️ Rapide à exécuter (en parallèle)</li>
+<li>📄 JSON <em>first class citizen</em></li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_démo_dans_l_ide">
+<h2>Démo dans l&#8217;IDE</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="demo" src="images/demo.gif">
+</div>
+</div>
+</section>
+<section class="slide" id="_documentation">
+<h2>Documentation</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="documentation" src="images/documentation.png">
+</div>
+</div>
+</section>
+<section class="slide" id="_pour_aller_plus_loin">
+<h2>Pour aller plus loin</h2>
+<div class="imageblock" style="float: right">
+<div class="content">
+<img alt="kick pain" src="images/kick-pain.gif">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>🤥 Mock Servlet : pas besoin de démarrer un <em>vrai</em> serveur</li>
+<li>📑 Intégration à Spring REST Docs</li>
+<li>🔜 Utilisation dans scenario Gatling</li>
+<li>🖥️ Import scenario Postman</li>
+<li>🤮 Supporte aussi SOAP (XML)</li>
+<li><p>
+🤔 Consumer Driven Contracts<div class="ulist">
+<ul>
+<li>Test Doubles</li>
+<li>Contract Tests</li>
+</ul>
+</div></p></li>
+</ul>
+</div>
+</section>
+<section class="slide" id="_questions">
+<h2>Questions ?</h2>
+<div class="imageblock">
+<div class="content">
+<img alt="salute" src="images/salute.gif" width="640">
+</div>
+</div>
+<div class="paragraph"><p>Le code et les slides : <span class="icon"><i class="icon-github"></i></span>/binout/karate-devoxxfr2018</p></div>
+<div class="imageblock">
+<div class="content">
+<img alt="qrcode" src="images/qrcode.jpg">
+</div>
+</div>
+</section>
+<div aria-role="navigation">
+<a class="deck-prev-link" href="#" title="Previous">&#8592;</a>
+<a class="deck-next-link" href="#" title="Next">&#8594;</a>
+</div>
+<p aria-role="status" class="deck-status">
+<span class="deck-status-current"></span>
+/
+<span class="deck-status-total"></span>
+</p>
+<form action="." class="goto-form" method="get">
+<label for="goto-slide">Go to Slide:</label>
+<input id="goto-slide" list="goto-datalist" name="slidenum" type="text">
+<datalist id="goto-data-list"></datalist>
+<input type="submit" value="Go">
+</form>
+</div>
+<script src="deck.js/jquery.min.js"></script>
+<script src="deck.js/core/deck.core.js"></script>
+<script src="deck.js/extensions/scale/deck.scale.js"></script>
+<script src="deck.js/extensions/goto/deck.goto.js"></script>
+<script src="deck.js/extensions/navigation/deck.navigation.js"></script>
+<script src="deck.js/extensions/status/deck.status.js"></script>
+<script>
+  (function($, deck, undefined) {
+    $.deck.defaults.keys['previous'] = [8, 33, 37, 39];
+    $.deck.defaults.keys['next'] = [13, 32, 34, 39];
+  
+    $.extend(true, $[deck].defaults, {
+        countNested: false
+    });
+  
+    $.deck('.slide');
+  })(jQuery, 'deck');
+</script>
+<style>
+  .slide.canvas-image {
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  display: -moz-box;
+  display: -webkit-box;
+  display: -ms-box;
+  display: box;
+  -moz-box-orient: vertical;
+  -webkit-box-orient: vertical;
+  -ms-box-orient: vertical;
+  box-orient: vertical;
+  -moz-box-align: start;
+  -webkit-box-align: start;
+  -ms-box-align: start;
+  box-align: start;
+  -moz-box-pack: start;
+  -webkit-box-pack: start;
+  -ms-box-pack: start;
+  box-pack: start;}
+  
+  .bottom-left {
+    left: 1%;
+    bottom: 20%; }
+  
+  .top-left {
+    left: 1%;
+    top: 20%; }
+  
+  .bottom-right {
+    right: 1%;
+    bottom: 20%; }
+  
+  .top-right {
+    right: 1%;
+    top: 20%; }
+  
+  .center-up {
+    right: 50%;
+    top: 1%;
+  }
+  
+  .center-down {
+    right: 50%;
+    bottom: 1%;
+  }
+  .canvas-image .canvas-caption p {
+    text-align: center;
+    padding-top: 0;
+    padding: 0;
+    -moz-transform: none;
+    -webkit-transform: none;
+    -o-transform: none;
+    -ms-transform: none;
+    transform: none;
+    display: inline;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    font-weight: bold;
+    font-size: 58px;
+    -webkit-box-shadow: 2px 2px 2px #000;
+    -moz-box-shadow: 2px 2px 2px #000;
+    box-shadow: 2px 2px 2px #000;
+    padding: 1rem;
+    color: white; }
+  kbd.keyseq { color: #555555; }
+  kbd:not(.keyseq) {
+    display: inline-block;
+    color: #222222;
+    font-size: 0.7em;
+    line-height: 1.4;
+    background-color: #F7F7F7;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px white inset;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px white inset;
+    margin: -0.15em 0.15em 0 0.15em;
+    padding: 0.2em 0.6em;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  kbd kbd:first-child { margin-left: 0; }
+  kbd kbd:last-child { margin-right: 0; }
+</style>
+</body>
+</html>
