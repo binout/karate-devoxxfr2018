@@ -90,6 +90,8 @@ Une autre solution !
 
 == Karate
 
+image::images/karate-logo.svg[float="right"]
+
 [quote, Peter Thomas (Intuit)]
 Web-Services Testing Made Simple.
 
